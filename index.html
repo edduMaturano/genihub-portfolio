@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfólio — Geni Hub</title>
+<style>
+  :root {
+    --fundo: #f6f3ee;
+    --papel: #ffffff;
+    --tinta: #1d2430;
+    --suave: #5d6675;
+    --marca: #17324d;
+    --destaque: #d98a1f;
+    --linha: #e3ddd2;
+    --raio: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+    background: var(--fundo); color: var(--tinta); line-height: 1.65;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: var(--marca); }
+
+  /* Cabeçalho */
+  header {
+    position: sticky; top: 0; z-index: 10; background: var(--marca);
+    box-shadow: 0 2px 10px rgba(0,0,0,.18);
+  }
+  .barra {
+    max-width: 1100px; margin: 0 auto; padding: 14px 20px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  }
+  .logo { color: #fff; font-weight: 800; font-size: 1.25rem; text-decoration: none; letter-spacing: .3px; }
+  .logo span { color: var(--destaque); }
+  nav { display: flex; gap: 4px; flex-wrap: wrap; }
+  nav a {
+    color: #dfe7ef; text-decoration: none; font-size: .92rem; padding: 6px 12px; border-radius: 8px;
+  }
+  nav a:hover, nav a:focus-visible { background: rgba(255,255,255,.12); color: #fff; }
+
+  /* Banner */
+  .banner {
+    background: linear-gradient(135deg, var(--marca) 0%, #24507a 100%);
+    color: #fff; text-align: center; padding: 84px 20px 92px;
+  }
+  .banner small { text-transform: uppercase; letter-spacing: 3px; color: var(--destaque); font-weight: 700; }
+  .banner h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); margin: 10px 0 12px; line-height: 1.1; }
+  .banner p { max-width: 640px; margin: 0 auto; color: #d5e0ea; font-size: 1.08rem; }
+
+  /* Seções */
+  main { max-width: 1100px; margin: 0 auto; padding: 0 20px 60px; }
+  section { padding-top: 64px; }
+  h2 {
+    font-size: 1.75rem; color: var(--marca); margin-bottom: 22px; padding-bottom: 10px;
+    border-bottom: 3px solid var(--destaque); display: inline-block;
+  }
+  h3 { font-size: 1.12rem; color: var(--marca); margin-bottom: 8px; }
+  p + p { margin-top: 12px; }
+  .cartao {
+    background: var(--papel); border: 1px solid var(--linha); border-radius: var(--raio); padding: 24px;
+  }
+  .grade { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .trio { margin-top: 24px; }
+  .numero {
+    display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px;
+    border-radius: 50%; background: var(--destaque); color: #fff; font-weight: 700; margin-bottom: 10px;
+  }
+  .etiquetas { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+  .etiquetas li {
+    list-style: none; background: #eef3f8; color: var(--marca); border-radius: 999px;
+    padding: 4px 12px; font-size: .88rem; font-weight: 600;
+  }
+
+  /* Diagramas */
+  .diagrama { margin-bottom: 24px; }
+  .diagrama > p { color: var(--suave); margin-bottom: 14px; }
+  .diagrama.larga { grid-column: 1 / -1; }
+  .figura.estreita { max-width: 560px; margin: 0 auto; }
+  .diagrama .grade { align-items: start; }
+  .diagrama > p.aviso { background: #eef3f8; color: var(--marca); border-left: 4px solid var(--destaque); border-radius: 6px; padding: 8px 12px; margin-top: 0; font-size: .95rem; }
+  .figura { border: 1px solid var(--linha); border-radius: 10px; overflow: hidden; background: #fafafa; }
+  .figura > a { display: block; }
+  .figura img { width: 100%; }
+  figcaption { font-size: .88rem; color: var(--suave); padding: 8px 12px; border-top: 1px solid var(--linha); background: #fff; }
+  .falta {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+    min-height: 220px; padding: 20px; background: repeating-linear-gradient(45deg, #faf6ee, #faf6ee 12px, #f3ecdf 12px, #f3ecdf 24px);
+    color: #8a6a2c; font-size: .92rem;
+  }
+  .falta code { background: #fff; padding: 2px 8px; border-radius: 6px; margin-top: 6px; }
+
+  table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: .95rem; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--linha); }
+  th { background: #eef3f8; color: var(--marca); }
+  .rolagem { overflow-x: auto; }
+  ol.funcoes { margin: 14px 0 0 20px; }
+  ol.funcoes li { margin-bottom: 6px; }
+
+  .intro-video { color: var(--suave); margin-bottom: 14px; }
+  video { width: 100%; border-radius: 10px; background: #000; }
+
+  /* Artefatos */
+  .lista-links { list-style: none; }
+  .lista-links li { border-bottom: 1px solid var(--linha); }
+  .lista-links li:last-child { border-bottom: 0; }
+  .lista-links a { display: block; padding: 11px 4px; text-decoration: none; font-weight: 600; }
+  .lista-links a::before { content: "📄 "; }
+  .lista-links a:hover, .lista-links a:focus-visible { color: var(--destaque); }
+
+  /* Marcação do que falta preencher — apague a classe .todo ao preencher */
+  .todo { background: #fff2b3; outline: 1px dashed #c9a100; border-radius: 4px; padding: 0 4px; }
+
+  .identificacao dl { display: grid; grid-template-columns: max-content 1fr; gap: 6px 18px; }
+  .identificacao dt { font-weight: 700; color: var(--marca); }
+  footer { text-align: center; padding: 26px 20px; background: var(--marca); color: #c9d5e0; font-size: .9rem; }
+
+  @media (max-width: 640px) {
+    .barra { justify-content: center; }
+    .identificacao dl { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="barra">
+    <a class="logo" href="#inicio">Geni<span>Hub</span></a>
+    <nav aria-label="Seções">
+      <a href="#inicio">Início</a>
+      <a href="#proposta">Proposta e objetivo</a>
+      <a href="#diagramas">Diagramas</a>
+      <a href="#telas">Telas do sistema</a>
+      <a href="#artefatos">Artefatos</a>
+    </nav>
+  </div>
+</header>
+
+<div class="banner" id="inicio">
+  <small>Portfólio de Estágio</small>
+  <h1>Geni Hub</h1>
+  <p>Sistema web de gestão comercial desenvolvido para o bar e mercearia A.T. Moreira Maturano.</p>
+</div>
+
+<main>
+
+  <!-- ================= PROPOSTA ================= -->
+  <section id="proposta">
+    <h2>Proposta e objetivo</h2>
+    <div class="cartao">
+      <p>O Geni Hub é um sistema web de gestão comercial desenvolvido durante o estágio supervisionado para a A.T. Moreira Maturano, estabelecimento que atua como bar e mercearia e comercializa bebidas, materiais hidráulicos, produtos para pets e itens de varejo em geral.</p>
+      <p>Antes do sistema, todos os processos do estabelecimento eram manuais: não havia controle do estoque e as dívidas dos clientes eram anotadas em papel, sem data definida de pagamento.</p>
+      <p>O objetivo do projeto é permitir que o funcionário registre os produtos e acompanhe a quantidade disponível de cada um, e mantenha o saldo devedor de cada cliente atualizado e disponível no momento do atendimento.</p>
+    </div>
+
+    <div class="grade trio">
+      <div class="cartao">
+        <span class="numero">1</span>
+        <h3>Problema</h3>
+        <p>Ausência de controle de estoque e registro de dívidas de clientes em papel, sem datas de pagamento definidas.</p>
+      </div>
+      <div class="cartao">
+        <span class="numero">2</span>
+        <h3>Tecnologias</h3>
+        <ul class="etiquetas">
+          <li>Java 17</li><li>Spring Boot</li><li>React 19</li><li>Vite</li>
+          <li>TypeScript</li><li>React Router DOM</li><li>PostgreSQL</li>
+        </ul>
+      </div>
+      <div class="cartao">
+        <span class="numero">3</span>
+        <h3>Arquitetura</h3>
+        <p>Aplicação web com front-end em React, back-end em Spring Boot e banco de dados PostgreSQL, utilizada pelo Funcionário e pelo Administrador, que também gerencia os funcionários.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DIAGRAMAS ================= -->
+  <section id="diagramas">
+    <h2>Diagramas</h2>
+
+    <div class="cartao diagrama">
+      <h3>1. Diagrama de caso de uso</h3>
+      <p>Funcionalidades do sistema e a interação do Funcionário e do Administrador com cada uma delas.</p>
+      <figure class="figura">
+        <a href="img/caso-de-uso.png" target="_blank" rel="noopener"><img src="img/caso-de-uso.png" alt="Diagrama de caso de uso do Geni Hub"></a>
+      </figure>
+
+      <h3 style="margin-top:22px">Funcionalidades</h3>
+      <ol class="funcoes">
+        <li><strong>Suc_Gerenciar Funcionários</strong> — o administrador cadastra, edita e desativa os funcionários e define o usuário e a senha de acesso de cada um.</li>
+        <li><strong>Suc_Gerenciar Produtos</strong> — cadastro, edição e desativação de produtos, com código, categoria, quantidade mínima, preço de custo e preço de venda.</li>
+        <li><strong>Suc_Gerenciar Estoque</strong> — registro de entradas, saídas e ajustes de estoque, com histórico de quem fez cada movimentação e quando.</li>
+        <li><strong>Suc_Gerenciar Clientes</strong> — cadastro, edição e desativação de clientes, com acesso às dívidas de cada um.</li>
+        <li><strong>Suc_Gerenciar Valores</strong> — registro das dívidas dos clientes, com data combinada opcional, e dos pagamentos totais ou parciais, mantendo o saldo atualizado.</li>
+        <li><strong>Suc_Gerenciar Calendário</strong> — calendário com os pagamentos combinados de cada dia e o total a receber no mês.</li>
+        <li><strong>Suc_Enviar Mensagem Automática</strong> — envio de mensagem de cobrança pelo WhatsApp ao cliente com pagamento pendente ou em atraso, a partir de um texto padrão editável.</li>
+      </ol>
+
+      <h3 style="margin-top:22px">Cronograma</h3>
+      <div class="rolagem">
+        <table>
+          <thead><tr><th>Caso de uso</th><th>Status</th><th>Data</th></tr></thead>
+          <tbody>
+            <tr><td>Suc_Gerenciar Funcionários</td><td>Concluído</td><td>04/05/2026</td></tr>
+            <tr><td>Suc_Gerenciar Produtos</td><td>Concluído</td><td>11/05/2026</td></tr>
+            <tr><td>Suc_Gerenciar Clientes</td><td>Concluído</td><td>18/05/2026</td></tr>
+            <tr><td>Suc_Gerenciar Estoque</td><td>Concluído</td><td>04/08/2026</td></tr>
+            <tr><td>Suc_Gerenciar Valores</td><td>Concluído</td><td>11/08/2026</td></tr>
+            <tr><td>Suc_Gerenciar Calendário</td><td>Concluído</td><td>04/11/2026</td></tr>
+            <tr><td>Suc_Enviar Mensagem Automática</td><td>Concluído</td><td>11/11/2026</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+      <div class="cartao diagrama larga">
+        <h3>2. Entidade e relacionamento</h3>
+        <p>Estrutura das tabelas do banco de dados e seus relacionamentos.</p>
+        <figure class="figura"><a href="img/entidade-relacionamento.png" target="_blank" rel="noopener"><img src="img/entidade-relacionamento.png" alt="Diagrama de entidade e relacionamento"></a><figcaption>Clique no diagrama para abrir em tamanho real.</figcaption></figure>
+      </div>
+      <div class="cartao diagrama larga">
+        <h3>3. Classes</h3>
+        <p>Classes do sistema, seus atributos, métodos e associações.</p>
+        <figure class="figura"><a href="img/classes.png" target="_blank" rel="noopener"><img src="img/classes.png" alt="Diagrama de classes"></a><figcaption>Para melhor visualização, <a href="https://drive.google.com/file/d/1Y2B3pGlGwTGXj0_hFIz_2RUE09vjyzea/view?usp=sharing" target="_blank" rel="noopener">abra o diagrama de classes no Google Drive</a>.</figcaption></figure>
+      </div>
+      <div class="cartao diagrama larga">
+        <h3>4. Implantação</h3>
+        <p>Como o sistema é distribuído entre navegador, servidor e banco de dados.</p>
+        <figure class="figura estreita"><a href="img/implantacao.png" target="_blank" rel="noopener"><img src="img/implantacao.png" alt="Diagrama de implantação"></a></figure>
+      </div>
+      <div class="cartao diagrama larga">
+        <h3>5. Workflow AS IS</h3>
+        <p>Como o processo funcionava no estabelecimento antes do sistema.</p>
+        <figure class="figura"><a href="img/workflow-as-is.png" target="_blank" rel="noopener"><img src="img/workflow-as-is.png" alt="Workflow AS IS"></a></figure>
+      </div>
+
+    <div class="cartao diagrama">
+      <h3>6. Sequência</h3>
+      <p>Troca de mensagens entre os componentes em cada funcionalidade.</p>
+      <p class="aviso">Até o momento, estes são os únicos diagramas de sequência elaborados: Suc_Gerenciar Pessoas e Suc_Gerenciar Produtos.</p>
+      <div class="grade">
+        <figure class="figura"><a href="img/sequencia-1.png" target="_blank" rel="noopener"><img src="img/sequencia-1.png" alt="Diagrama de sequência Suc_Gerenciar Pessoas"></a><figcaption>Suc_Gerenciar Pessoas — listagem, cadastro, atualização e desativação de clientes. Para melhor visualização, <a href="https://drive.google.com/file/d/1Ccubnlu537kR0Xjf1ty0veCDjpZrZ3fc/view" target="_blank" rel="noopener">abra o diagrama no Google Drive</a>.</figcaption></figure>
+        <figure class="figura"><a href="img/sequencia-2.png" target="_blank" rel="noopener"><img src="img/sequencia-2.png" alt="Diagrama de sequência Suc_Gerenciar Produtos"></a><figcaption>Suc_Gerenciar Produtos — listagem com busca, cadastro, atualização e desativação de produtos. Para melhor visualização, <a href="https://drive.google.com/file/d/1SLAxKuqhH2E7TSxhyMwKSW06Jjq-3KLd/view" target="_blank" rel="noopener">abra o diagrama no Google Drive</a>.</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="cartao diagrama">
+      <h3>7. Estado</h3>
+      <p>Estados pelos quais os objetos do sistema passam e o que provoca cada mudança.</p>
+      <div class="grade">
+        <figure class="figura"><a href="img/estado-1.png" target="_blank" rel="noopener"><img src="img/estado-1.png" alt="Diagrama de estado da Pessoa"></a><figcaption>Pessoa — após o cadastro fica Ativa e, ao ser desativada, passa a Inativa, sem exclusão dos dados.</figcaption></figure>
+        <figure class="figura"><a href="img/estado-2.png" target="_blank" rel="noopener"><img src="img/estado-2.png" alt="Diagrama de estado do Produto"></a><figcaption>Produto — após o cadastro fica Ativo e, ao ser desativado, passa a Inativo, mantendo o histórico de movimentações.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TELAS ================= -->
+  <section id="telas">
+    <h2>Telas do sistema</h2>
+    <div class="cartao">
+      <p class="intro-video">Demonstração em vídeo das telas do sistema em funcionamento.</p>
+      <video controls preload="metadata">
+        <source src="video/demonstracao.mp4" type="video/mp4">
+        Seu navegador não suporta a reprodução de vídeo.
+      </video>
+    </div>
+  </section>
+
+  <!-- ================= ARTEFATOS ================= -->
+  <section id="artefatos">
+    <h2>Artefatos</h2>
+    <div class="grade">
+      <div class="cartao">
+        <h3>Documentos</h3>
+        <ul class="lista-links">
+          <li><a href="https://docs.google.com/document/d/1Eq2KRLl5M63fvJfdjFsBr3nFrT1FsJ_GTJvFkQV-n4Y/edit?usp=sharing" target="_blank" rel="noopener">Pedidos do Investidor</a></li>
+          <li><a href="https://docs.google.com/document/d/1Nd3TDOeHwvQzhXVQm39IbSzQZRKoI1XAh2CVg11n_NE/edit?usp=sharing" target="_blank" rel="noopener">Visão Informal</a></li>
+          <li><a href="https://docs.google.com/document/d/1QmhvnbSuVt5g2InssgoUmzgSAb4uY0jTf0GElBdl1Ts/edit?usp=sharing" target="_blank" rel="noopener">Especificação Complementar</a></li>
+          <li><a href="https://docs.google.com/document/d/1eD1C6_7BRQoBCyVZFTWLv3XPhfs7It0M4H9pn_GRi_A/edit?usp=sharing" target="_blank" rel="noopener">Glossário</a></li>
+          <li><a href="https://docs.google.com/document/d/1X7UMAdDElVlr3oN1WdNslD1pLqoAukBopOfTi0TQ-a8/edit?usp=sharing" target="_blank" rel="noopener">Relatório de Estágio</a></li>
+        </ul>
+      </div>
+      <div class="cartao">
+        <h3>Especificações de caso de uso</h3>
+        <ul class="lista-links">
+          <li><a href="https://docs.google.com/document/d/1_EXCDCxauIjYxxA-NU_lnzhuiDrTw8WgSt3jeuEzjWM/edit?usp=sharing" target="_blank" rel="noopener">Suc_Gerenciar Pessoas</a></li>
+          <li><a href="https://docs.google.com/document/d/1Amuw0kXirulag5kCeGJB3ykG-gd3YCrGUZ4jk6aDkWM/edit?usp=sharing" target="_blank" rel="noopener">Suc_Gerenciar Produtos</a></li>
+          <li><a href="https://docs.google.com/document/d/1x7Gu_aUDlWA63MErO50dfAP7pRq15WTMrfEIdbqCSGA/edit?usp=sharing" target="_blank" rel="noopener">Suc_Gerenciar Estoque</a></li>
+          <li><a href="https://docs.google.com/document/d/1Uxm3vPCW_ivfqXa-DdV9ZmP2Na1SH0uxvtQBXrGXC3c/edit?usp=sharing" target="_blank" rel="noopener">Suc_Gerenciar Valores</a></li>
+          <li><a href="https://docs.google.com/document/d/1oi1x0qrVtu9lbBniCtwJW7hx10S5msFTHlbsmA_LYA4/edit?usp=sharing" target="_blank" rel="noopener">Suc_Gerenciar Funcionários</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= IDENTIFICAÇÃO ================= -->
+  <section id="aluno">
+    <h2>Identificação</h2>
+    <div class="cartao identificacao">
+      <dl>
+        <dt>Aluno</dt><dd>Edduardo Maturano</dd>
+        <dt>Matrícula</dt><dd>242041008</dd>
+        <dt>Instituição</dt><dd>UniFil — Centro Universitário Filadélfia</dd>
+        <dt>Curso</dt><dd>Bacharelado em Ciência da Computação</dd>
+        <dt>Professor orientador</dt><dd>Matheus Vinícius Pires da Silva Garvão</dd>
+        <dt>Empresa</dt><dd>A.T. Moreira Maturano</dd>
+      </dl>
+    </div>
+  </section>
+
+</main>
+
+<footer>Portfólio de Estágio — Geni Hub · Edduardo Maturano · 2026</footer>
+
+<script>
+  // Imagem que ainda não existe na pasta: mostra um aviso com o nome do arquivo esperado
+  document.querySelectorAll('.figura img').forEach(function (img) {
+    img.addEventListener('error', function () {
+      var aviso = document.createElement('div');
+      aviso.className = 'falta';
+      aviso.innerHTML = 'Imagem ainda não adicionada<code>' + img.getAttribute('src') + '</code>';
+      var alvo = img.closest('a') || img;
+      alvo.replaceWith(aviso);
+    });
+  });
+</script>
+</body>
+</html>
